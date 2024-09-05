@@ -13,9 +13,9 @@ jobs:
       - name: Configure AWS Credentials 2
         uses: aws-actions/configure-aws-credentials@v4
         with:
-           aws-region: us-east-2
-           aws-access-key-id: ${{ steps.creds.outputs.aws-access-key-id }}
-           aws-secret-access-key: ${{ steps.creds.outputs.aws-secret-access-key }}
+           aws-region: us-east-1
+           aws-access-key-id: ${{ secret.FIRST_TEST }}
+           aws-secret-access-key: ${{ secret.SECOND_TEST }}
       - name: Login to Amazon ECR
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
