@@ -2,7 +2,7 @@ name: CICD
 
 on:
   push:
-    branches: [ deploy-to-ecs-fargate ]
+    branches: [ deploy-EC2 ]
 
 jobs:
   build-and-deploy:
@@ -48,5 +48,5 @@ jobs:
         with:
           task-definition: ${{ steps.task-def.outputs.task-definition }}
           service: nodejs-app-service
-          cluster: DevCluster
+          cluster: keyCluster
           wait-for-service-stability: true    
