@@ -10,12 +10,12 @@ jobs:
     steps:
       - name: Checkout source
         uses: actions/checkout@v3
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v3
+      - name: Configure AWS Credentials 2
+        uses: aws-actions/configure-aws-credentials@v4
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: 'eu-north-1'
+           aws-region: us-east-2
+           aws-access-key-id: ${{ steps.creds.outputs.aws-access-key-id }}
+           aws-secret-access-key: ${{ steps.creds.outputs.aws-secret-access-key }}
       - name: Login to Amazon ECR
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
