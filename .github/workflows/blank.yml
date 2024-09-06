@@ -20,7 +20,7 @@ jobs:
         uses: aws-actions/amazon-ecr-login@v1
         with:
             mask-password: 'true'
-            AWS_REGION: us-east-1
+            registry-type: private
             
       - name: Build Docker image
         run: |
