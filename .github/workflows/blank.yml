@@ -13,25 +13,22 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
-
       - name: Log in to Amazon ECR
         uses: aws-actions/amazon-ecr-login@v1
         with:
-            mask-password: 'true'
-            registry-type: private
-            
-      - name: Build Docker image
-        run: |
-          docker build -t $ECR_REGISTRY/$REPOSITORY:$IMAGE_TAG -f path/to/Dockerfile .
-          docker push $ECR_REGISTRY/$REPOSITORY:$IMAGE_TAG
+          registry-type: private
         env:
-          AWS_DEFAULT_REGION: us-east-1
           AWS_REGION: us-east-1
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+      - name: Build Docker image
+        run: |
+          docker build -t $ECR_REGISTRY/$REPOSITORY:$IMAGE_TAG .
+          docker push $ECR_REGISTRY/$REPOSITORY:$IMAGE_TAG
+        env:
           ECR_REGISTRY: 339713041825.dkr.ecr.us-east-1.amazonaws.com
           IMAGE_TAG: c259818309868741500ce2dc23d2f7e44811b50a
           REPOSITORY: nodejs-app
+
 
